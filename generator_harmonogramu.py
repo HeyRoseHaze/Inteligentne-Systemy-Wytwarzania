@@ -48,17 +48,21 @@ for i in range(8):
     #przesuniecie zadania o i miejsca, aby się nie nakładały w pionie
     zadania = zadania[-i:] + zadania[:-i] if i > 0 else list(zadania)
 
-    czas_trwania = []
+    czasy_trwania = []
     czas_poczatkowy = 0
 
     for czas_koncowy in C[i]:
-        czas_trwania.append(czas_koncowy - czas_poczatkowy)
+        czasy_trwania.append(czas_koncowy - czas_poczatkowy)
 
-    abstr_plan.append({'zadanie': zadania, 'czas_trwania': czas_trwania})
+    abstr_plan.append({'zadanie': zadania, 'czas_trwania': czasy_trwania})
 
 # randomizacja planu
 random.shuffle(abstr_plan)
 
+# Rysowanie w Excelu
+for index_maszyny, plan in enumerate(abstr_plan):
+    numer_wiersza = index_maszyny + 2
+    ws.cell( row = numer_wiersza, column=1, value=f"Maszyna {index_maszyny + 1}")
 
 
 wb.save("harmonogram.xlsx")
