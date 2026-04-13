@@ -42,20 +42,23 @@ C = [
 zadania = list(range(9))
 random.shuffle(zadania) 
 
-for i in task:
-    nr_maszyny = i[0]
-    nr_zadania = i[1]
-    start = i[2]
-    stop = i[3]
+abstr_plan = []
 
-    wiersz = nr_maszyny + 1
-    kolor = nr_zadania - 1
-    malowanie = fills[kolor]
+for i in range(8):
+    #przesuniecie zadania o i miejsca, aby się nie nakładały w pionie
+    zadania = zadania[-i:] + zadania[:-i] if i > 0 else list(zadania)
 
-    długosc = stop - start
+    czas_trwania = []
+    czas_poczatkowy = 0
 
-    for t in range(długosc):
-        kolumna = start + t + 2
-        ws.cell(row=wiersz, column=kolumna).fill = malowanie
+    for czas_koncowy in C[i]:
+        czas_trwania.append(czas_koncowy - czas_poczatkowy)
+
+    abstr_plan.append({'zadanie': zadania, 'czas_trwania': czas_trwania})
+
+# randomizacja planu
+random.shuffle(abstr_plan)
+
+
 
 wb.save("harmonogram.xlsx")
