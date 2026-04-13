@@ -53,8 +53,8 @@ for i in range(8):
 
     for czas_koncowy in C[i]:
         czasy_trwania.append(czas_koncowy - czas_poczatkowy)
-
-    abstr_plan.append({'zadanie': zadania, 'czas_trwania': czasy_trwania})
+        czas_poczatkowy = czas_koncowy
+    abstr_plan.append({'zadania': zadania, 'czasy_trwania': czasy_trwania})
 
 # randomizacja planu
 random.shuffle(abstr_plan)
@@ -64,5 +64,11 @@ for index_maszyny, plan in enumerate(abstr_plan):
     numer_wiersza = index_maszyny + 2
     ws.cell( row = numer_wiersza, column=1, value=f"Maszyna {index_maszyny + 1}")
 
-
+    aktualny_czas = 0
+    for index_zadania, czas_trwania in zip(plan['zadania'], plan['czasy_trwania']):
+        wypelnienie = fills[index_zadania]
+        for t in range(czas_trwania):
+            numer_kolumny = aktualny_czas + t + 2
+            ws.cell(row = numer_wiersza, column= numer_kolumny).fill = wypelnienie
+        aktualny_czas += czas_trwania
 wb.save("harmonogram.xlsx")
