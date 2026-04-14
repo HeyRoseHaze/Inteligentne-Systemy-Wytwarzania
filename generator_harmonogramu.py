@@ -8,7 +8,7 @@ ws.title = 'Harmonogram'
 
 for i in range(101):
     column = i + 2
-    cell = ws.cell(row = 10, column = column, value = i)
+    cell = ws.cell(row = 17, column = column, value = i)
     cell.alignment = Alignment(horizontal = 'center')
     ws.column_dimensions[op.utils.cell.get_column_letter(column)].width = 3
 
@@ -61,7 +61,7 @@ random.shuffle(abstr_plan)
 
 # Rysowanie w Excelu
 for index_maszyny, plan in enumerate(abstr_plan):
-    numer_wiersza = index_maszyny + 2
+    numer_wiersza = index_maszyny * 2 + 2
     ws.cell( row = numer_wiersza, column=1, value=f"Maszyna {index_maszyny + 1}")
 
     aktualny_czas = 0
@@ -69,11 +69,11 @@ for index_maszyny, plan in enumerate(abstr_plan):
         wypelnienie = fills[index_zadania]
         for t in range(czas_trwania):
             numer_kolumny = aktualny_czas + t + 2
-            ws.cell(row = numer_wiersza+1, column= numer_kolumny).fill = wypelnienie
+            ws.cell(row = numer_wiersza, column= numer_kolumny).fill = wypelnienie
         aktualny_czas += czas_trwania
 
 # Generowanie legendy 
-wiersz_legendy = 12
+wiersz_legendy = 19
 ws.cell(row=wiersz_legendy-1, column=2, value="Zadania:")
 for i in range(9):
     ws.cell(row=wiersz_legendy + i, column=2).fill=fills[i]
