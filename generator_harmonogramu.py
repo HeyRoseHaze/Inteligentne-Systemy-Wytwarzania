@@ -11,6 +11,7 @@ for i in range(101):
     cell = ws.cell(row = 17, column = column, value = i)
     cell.alignment = Alignment(horizontal = 'center')
     ws.column_dimensions[op.utils.cell.get_column_letter(column)].width = 3
+    
 
 
 colors = [
@@ -78,5 +79,8 @@ ws.cell(row=wiersz_legendy-1, column=2, value="Zadania:")
 for i in range(9):
     ws.cell(row=wiersz_legendy + i, column=2).fill=fills[i]
     ws.cell(row=wiersz_legendy + i, column=3, value=f'Zadanie {i + 1}')
+
+# Zmiana szerokości kolumny A
+ws.column_dimensions['A'].width = 10
     
 wb.save("harmonogram.xlsx")
