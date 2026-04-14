@@ -71,4 +71,12 @@ for index_maszyny, plan in enumerate(abstr_plan):
             numer_kolumny = aktualny_czas + t + 2
             ws.cell(row = numer_wiersza, column= numer_kolumny).fill = wypelnienie
         aktualny_czas += czas_trwania
+
+# Generowanie legendy 
+wiersz_legendy = 12
+ws.cell(row=wiersz_legendy-1, column=2, value="Zadania:")
+for i in range(9):
+    ws.cell(row=wiersz_legendy + i, column=2).fill=fills[i]
+    ws.cell(row=wiersz_legendy + i, column=3, value=f'Zadanie {i + 1}')
+    
 wb.save("harmonogram.xlsx")
