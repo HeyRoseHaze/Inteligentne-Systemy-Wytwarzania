@@ -69,7 +69,7 @@ for index_maszyny, plan in enumerate(abstr_plan):
         wypelnienie = fills[index_zadania]
         for t in range(czas_trwania):
             numer_kolumny = aktualny_czas + t + 2
-            ws.cell(row = numer_wiersza, column= numer_kolumny).fill = wypelnienie
+            ws.cell(row = numer_wiersza+1, column= numer_kolumny).fill = wypelnienie
         aktualny_czas += czas_trwania
 
 # Generowanie legendy 
